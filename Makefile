@@ -11,12 +11,12 @@
 ## Please use configure script
 
 
-all	: do_configure
+all:				do_configure
 
-do_configure	:
-	./configure
+do_configure:
+					@./configure > ./configure.log
 
-clean	:
-	./configure clean
+clean:
+					@./configure clean > ./configure.log
 
-re	: clean all
+re: 				clean all
