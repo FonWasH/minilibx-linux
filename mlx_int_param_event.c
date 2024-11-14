@@ -9,6 +9,7 @@
 */
 
 #include	"mlx_int.h"
+#include	<stdio.h>
 
 int	mlx_int_param_undef()
 {
@@ -53,9 +54,16 @@ int	mlx_int_param_Expose(t_xvar *xvar, XEvent *ev, t_win_list *win)
     win->hooks[Expose].hook(win->hooks[Expose].param);
 }
 
+int mlx_int_param_ConfigureNotify(t_xvar *xvar, XEvent *ev, t_win_list *win)
+{
+  win->hooks[ConfigureNotify].hook(ev->xconfigure.width, ev->xconfigure.height,
+    win->hooks[ConfigureNotify].param);
+  return (0);
+}
 
 int	mlx_int_param_generic(t_xvar *xvar, XEvent *ev, t_win_list *win)
 {
+  printf("generic event\n");
   win->hooks[ev->type].hook(win->hooks[ev->type].param);
 }
 
@@ -83,7 +91,7 @@ int	(*(mlx_int_param_event[]))() =
   mlx_int_param_generic,
   mlx_int_param_generic,
   mlx_int_param_generic,
-  mlx_int_param_generic,
+  mlx_int_param_ConfigureNotify, /* 22 */
   mlx_int_param_generic,
   mlx_int_param_generic,
   mlx_int_param_generic,
