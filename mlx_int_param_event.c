@@ -63,7 +63,6 @@ int mlx_int_param_ConfigureNotify(t_xvar *xvar, XEvent *ev, t_win_list *win)
 
 int	mlx_int_param_generic(t_xvar *xvar, XEvent *ev, t_win_list *win)
 {
-  printf("generic event\n");
   win->hooks[ev->type].hook(win->hooks[ev->type].param);
 }
 
